@@ -1,0 +1,93 @@
+#details {
+  position: relative;
+  z-index: 2;
+}
+#details .bgg {
+  width: 100%;
+  height: 88vh;
+  position: absolute;
+  z-index: 1;
+}
+#details .details {
+  padding: 90px 0;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  color: white;
+}
+#details .details--window {
+  position: absolute;
+  z-index: 46;
+  padding: 30px;
+  border-radius: 12px;
+  width: 500px;
+  height: 400px;
+  background: white;
+  gap: 20px;
+  left: 500px;
+  display: none;
+}
+#details .details--window h2 {
+  color: #000;
+}
+#details .details--window img {
+  width: 300px;
+  top: 6px;
+}
+#details .details--img {
+  width: 300px;
+  z-index: 30;
+}
+#details .details--text {
+  gap: 10px;
+}
+#details .details--text i {
+  font-weight: 600;
+  font-size: 20px;
+}
+#details .details--text h4 {
+  margin-top: 30px;
+  font-size: 18px;
+  font-family: italic;
+}
+#details .details--text__dat {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+#details .details--text__dat h5 {
+  color: yellow;
+  font-size: 22px;
+}
+#details .details--text h1 {
+  font-weight: 900;
+}
+#details .details--text h1 span {
+  font-weight: 100;
+}
+#details .details--text__rat {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 20px 0;
+}
+#details .details--text__rat--circle {
+  width: 80px;
+  height: 80px;
+  background: #000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+#details .details--text__rat--circles {
+  width: 70px;
+  height: 70px;
+  background: #000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}/*# sourceMappingURL=Details.css.map */

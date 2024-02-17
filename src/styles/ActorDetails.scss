@@ -1,0 +1,24 @@
+#actorDetails {
+  padding: 70px 0;
+  .actorDetails {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    &--text {
+      display: flex;
+      flex-direction: column;
+      color: #000;
+      h2 {
+        margin: 10px 0;
+      }
+      h3 {
+        button {
+          // margin: 0 10px;
+          color: blue;
+          background: none;
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+#actor {
+  margin: 100px 0;
+  h1 {
+    padding-bottom: 100px;
+  }
+  .actor {
+    display: flex;
+    gap: 30px;
+    overflow: auto;
+    &--block {
+      background: #0000002c;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      border-radius: 12px;
+      flex-direction: column;
+      text-align: center;
+      margin: 20px;
+      h2 {
+        margin: 20px 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+#header {
+  padding: 30px 0;
+  background: #182449;
+}
+#header .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#header .header--nav {
+  display: flex;
+  gap: 20px;
+}
+#header .header--nav a {
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+}
+#header .header--search input {
+  padding: 8px 32px;
+  border-top-left-radius: 18px;
+  border-bottom-left-radius: 18px;
+  border: none;
+  background: white;
+  outline: none;
+}
+#header .header--search button {
+  padding: 8px 12px;
+  border-top-right-radius: 18px;
+  border-bottom-right-radius: 18px;
+}/*# sourceMappingURL=Header.css.map */

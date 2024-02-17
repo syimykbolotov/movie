@@ -1,0 +1,27 @@
+#actor {
+  margin: 100px 0;
+}
+#actor h1 {
+  padding: 100px;
+}
+#actor .actor {
+  display: flex;
+  overflow: auto;
+  gap: 30px;
+}
+#actor .actor--block {
+  width: 10%;
+  background: rgba(0, 0, 0, 0.1725490196);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 12px;
+  flex-direction: column;
+  text-align: center;
+  gap: 20px;
+}
+#actor .actor--block img {
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}/*# sourceMappingURL=Actor.css.map */
