@@ -1,0 +1,10 @@
+#favorite {
+    height: 100vh;
+  padding: 30px 0;
+  .favorite {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 20px 0;
+  }
+}

@@ -1,8 +1,12 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { LanguageContext } from "../../context";
+import { FaMoon } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 
 const Header = () => {
   let [inputValue, setInputValue] = useState("");
+  const { setLanguage, dark, setDark, favorite, setFavorite } = useContext(LanguageContext);
   let nav = useNavigate();
   return (
     <div id="header">
@@ -13,7 +17,6 @@ const Header = () => {
             width={200}
             alt="img"
           />
-
           <div className="header--nav">
             <Link to={"/"} href="#">
               Home
@@ -25,10 +28,24 @@ const Header = () => {
               Top Rated
             </Link>
           </div>
-          <select className="select" onChange={() => {}}>
-            <option>RU</option>
-            <option>EN</option>
+          <select
+            className="select"
+            onChange={(e) => setLanguage(e.target.value)}
+          >
+            <option value="en-US">English</option>
+            <option value="ru-RU">Russian</option>
+            <option value="fr-FR">French</option>
           </select>
+          <FaMoon
+            style={{
+              color: dark ? "white" : "black",
+            }}
+            onClick={() => setDark(!dark)}
+          />
+          <NavLink to={`/favorite`}>
+            <FaHeart color="white"/>
+          </NavLink>
+
           <div className="header--search">
             <input
               type="text"
@@ -37,6 +54,7 @@ const Header = () => {
               // }}
               onChange={(e) => setInputValue(e.target.value)}
             />
+
             <button
               onClick={
                 inputValue

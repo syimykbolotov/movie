@@ -1,15 +1,17 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { KEY_API } from "../../API";
 import user from "../../img/user.jpg";
+import { LanguageContext } from "../../context";
 
 const Actors = () => {
   const [actor, setActor] = useState({});
   let { id } = useParams();
+  const {language} = useContext(LanguageContext)
   function getAcc(key) {
     axios(
-      `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${key}&language=en-US`
+      `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${key}&language=${language}`
     ).then((res) => {
       setActor(res.data);
       //   console.log(res.data);
@@ -17,7 +19,7 @@ const Actors = () => {
   }
   useEffect(() => {
     getAcc(KEY_API);
-  }, []);
+  }, [language]);
   //   console.log(actor);
   let { cast, profile_path } = actor;
   return (

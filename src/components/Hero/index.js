@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { KEY_API } from "../../API";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { LanguageContext } from "../../context";
 
 const Hero = () => {
   // let [sea, setSea] = useState("");
   // let nav = useNavigate();
   const [popular, setPopular] = useState([]);
+  const {language} = useContext(LanguageContext)
   let result = [];
   function get(key) {
     axios(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=en-US&page=1`
+      `https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=${language}&page=1`
     ).then((res) => {
       res.data.results.map((el) => {
         result = [...result, el.backdrop_path];
@@ -20,7 +22,7 @@ const Hero = () => {
   }
   useEffect(() => {
     get(KEY_API);
-  }, []);
+  }, [language]);
   // console.log(popular);
 
   return (

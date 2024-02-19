@@ -7,6 +7,7 @@ import Hero from "./components/Hero";
 import MovieDetails from "./Pages/MovieDetails";
 import ActorDetails from "./Pages/ActorDetails";
 import Search from "./components/Search";
+import Favorite from "./components/Favorite";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/details/:id" element={<MovieDetails />} />
         <Route path="/actorDetails/:id" element={<ActorDetails />} />
         <Route path="/search/:movieName" element={<Search />} />
+        <Route path="/favorite" element={<Favorite />} />
       </Routes>
     </div>
   );

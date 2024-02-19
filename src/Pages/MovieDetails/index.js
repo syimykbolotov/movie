@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { KEY_API } from "../../API";
 import { GoDotFill } from "react-icons/go";
@@ -8,29 +8,53 @@ import { FaHeart } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 import { MdOutlineReplyAll } from "react-icons/md";
 import { HiPlayPause } from "react-icons/hi2";
+import { LanguageContext } from "../../context";
 import Video from "../../components/Video";
 import Actors from "../Actor";
 import mov from "../../img/mov.jpg";
 
 const MovieDetails = () => {
   const [details, setDetails] = useState({});
-  let [win, setWin] = useState(false);
-  let [bg, setBg] = useState(false);
-  let [red, setRed] = useState(false);
-  let { id } = useParams();
+  const { language, dark, favorite, setFavorite } = useContext(LanguageContext);
+  const [win, setWin] = useState(false);
+  const [bg, setBg] = useState(false);
+  const [red, setRed] = useState(false);
+  const { id } = useParams();
   function getDetails(key) {
     axios(
-      // `https://api.themoviedb.org/3/movie/866398?api_key=${key}&language=ru-RU`
-      `https://api.themoviedb.org/3/movie/${id}?api_key=${key}&language=en-EN`
+      `https://api.themoviedb.org/3/movie/${id}?api_key=${key}&language=${language}`
     ).then((res) => {
       setDetails(res.data);
     });
   }
+  function item() {
+    let task = JSON.parse(localStorage.getItem("fav")) || [];
+    let newFav = {
+      Name: { favorite },
+    };
+    let result = [...task, newFav];
+    localStorage.setItem("fav", JSON.stringify(result));
+  }
+  
+  let findHeart = favorite.some((el) => el.id === details.id);
+
+  function getMov(date) {
+    let task = JSON.parse(localStorage.getItem("fav")) || [];
+    let findMovie = favorite.find((el) => el.id === date.id);
+    if (findMovie) {
+      let filteredMovies = favorite.filter((el) => el.id !== date.id);
+      setFavorite(filteredMovies);
+      localStorage.setItem("fav", JSON.stringify(task));
+      // const [red, setRed] = useState(false);
+    } else {
+      setFavorite((prev) => [...prev, date]);
+      localStorage.setItem("fav", JSON.stringify(task));
+    }
+  }
   useEffect(() => {
     getDetails(KEY_API);
-  }, []);
-  // console.log(details);
-  let {
+  }, [language]);
+  const {
     title,
     poster_path,
     backdrop_path,
@@ -43,7 +67,12 @@ const MovieDetails = () => {
     tagline,
   } = details;
   return (
-    <>
+    <div
+      style={{
+        background: dark ? "black" : "white",
+        color: dark ? "white" : "black",
+      }}
+    >
       <div
         style={{
           background: `url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces${backdrop_path}) no-repeat `,
@@ -106,7 +135,6 @@ const MovieDetails = () => {
                 <GoDotFill />
                 <h5>
                   {Math.floor(runtime / 60)}h {Math.floor(runtime % 60)}m
-                  {/* {Math.floor(runtime)} */}
                 </h5>
               </div>
               <div className="details--text__rat">
@@ -115,15 +143,22 @@ const MovieDetails = () => {
                 </div>
                 <h2>Рейтинг</h2>
                 <div className="details--text__rat--circles">
-                  <TfiMenuAlt
-                    onClick={() => setRed(true)}
+                  <TfiMenuAlt />
+                </div>
+                <div
+                  className="details--text__rat--circles"
+                  onClick={() => {
+                    getMov(details);
+                    // item(details);
+                    // setRed(!red);
+                    // item(setRed(!red))
+                  }}
+                >
+                  <FaHeart
                     style={{
-                      color: red ? "white" : "red",
+                      color: findHeart ? "red" : "white",
                     }}
                   />
-                </div>
-                <div className="details--text__rat--circles">
-                  <FaHeart />
                 </div>
                 <div className="details--text__rat--circles">
                   <FaStar />
@@ -159,7 +194,7 @@ const MovieDetails = () => {
       </div>
       <Actors />
       <Video id={id} />
-    </>
+    </div>
   );
 };
 

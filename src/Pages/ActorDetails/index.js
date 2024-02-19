@@ -1,16 +1,18 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { KEY_API } from "../../API";
 import ActorsMovie from "../ActorsMovie";
+import { LanguageContext } from "../../context";
 
 const ActorDetails = () => {
   const [act, setAct] = useState({});
   const [open, setOpen] = useState(false);
+  const {language} = useContext(LanguageContext)
   let { id } = useParams();
   function getActorDetails(key) {
     axios(
-      `https://api.themoviedb.org/3/person/${id}?api_key=${key}&language=en-US`
+      `https://api.themoviedb.org/3/person/${id}?api_key=${key}&language=${language}`
     ).then((res) => {
       setAct(res.data);
     });
@@ -35,7 +37,7 @@ const ActorDetails = () => {
   }
   useEffect(() => {
     getActorDetails(KEY_API);
-  }, []);
+  }, [language]);
   console.log(act);
   let { name, biography, birthday, profile_path } = act;
   return (

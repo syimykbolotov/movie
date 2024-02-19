@@ -1,24 +1,32 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { KEY_API } from "../../API";
 import MovieCard from "../MovieCard";
+import { LanguageContext } from "../../context";
 
 const TopRated = () => {
   window.scroll(0, 0);
   const [popular, setPopular] = useState([]);
   const [page, setPage] = useState(1);
+  const { language, dark } = useContext(LanguageContext);
   function get(key) {
     axios(
-      `https://api.themoviedb.org/3/movie/top_rated?api_key=${key}&language=en-US&page=${page}`
+      `https://api.themoviedb.org/3/movie/top_rated?api_key=${key}&language=${language}&page=${page}`
     ).then((res) => {
       setPopular(res.data.results);
     });
   }
   useEffect(() => {
     get(KEY_API);
-  }, [page]);
+  }, [page, language]);
   return (
-    <div id="popular">
+    <div
+      id="popular"
+      style={{
+        background: dark ? "black" : "white",
+        color: dark ? "white" : "black",
+      }}
+    >
       <div className="container">
         <h1>Top Rated</h1>
         <div className="popular">

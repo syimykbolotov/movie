@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import mov from "../../img/mov.jpg";
+import { LanguageContext } from "../../context";
 
 const MovieCard = ({ el }) => {
+  const { dark, setDark } = useContext(LanguageContext);
   return (
-    <div className="movieCard">
+    <div
+      className="movieCard"
+      style={{
+        border: dark ? "2px solid white" : "2px solid black",
+      }}
+    >
       <Link to={`/details/${el.id}`}>
         {el.poster_path ? (
           <img
