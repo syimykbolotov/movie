@@ -39,16 +39,13 @@ const MovieDetails = () => {
   let findHeart = favorite.some((el) => el.id === details.id);
 
   function getMov(date) {
-    let task = JSON.parse(localStorage.getItem("fav")) || [];
     let findMovie = favorite.find((el) => el.id === date.id);
     if (findMovie) {
       let filteredMovies = favorite.filter((el) => el.id !== date.id);
       setFavorite(filteredMovies);
-      localStorage.setItem("fav", JSON.stringify(task));
       // const [red, setRed] = useState(false);
     } else {
       setFavorite((prev) => [...prev, date]);
-      localStorage.setItem("fav", JSON.stringify(task));
     }
   }
   useEffect(() => {
